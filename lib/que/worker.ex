@@ -145,7 +145,7 @@ defmodule Que.Worker do
     if Que.Worker.valid?(module) do
       :ok
     else
-      raise Que.Error.InvalidWorker, "#{ExUtils.Module.name(module)} is an Invalid Worker"
+      raise Que.Error.InvalidWorker, "#{inspect(module)} is an Invalid Worker"
     end
   end
 
@@ -192,14 +192,14 @@ defmodule Que.Worker do
         # Raises error if the Worker doesn't export a perform/1 method
         unless Module.defines?(__MODULE__, {:perform, 1}) do
           raise Que.Error.InvalidWorker,
-            "#{ExUtils.Module.name(__MODULE__)} must export a perform/1 method"
+            "#{inspect(__MODULE__)} must export a perform/1 method"
         end
 
 
         # Raise error if the concurrency option in invalid
         unless @concurrency == :infinity or (is_integer(@concurrency) and @concurrency > 0) do
           raise Que.Error.InvalidWorker,
-            "#{ExUtils.Module.name(__MODULE__)} has an invalid concurrency value"
+            "#{inspect(__MODULE__)} has an invalid concurrency value"
         end
       end
 

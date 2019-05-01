@@ -113,7 +113,7 @@ end
 defimpl String.Chars, for: Que.Job do
 
   def to_string(job) do
-    "Job # #{job.id} with #{ExUtils.Module.name(job.worker)}"
+    "Job # #{job.id} with #{inspect(job.worker)}"
   end
 end
 
